@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 /*
  * author GG weebcyberpunk@gmail.com
@@ -8,20 +9,36 @@
  */
 
 /*
- * Concatenates stdin to stdout,
- * breaking line on last blank
- * before args limit
+ * Copyright 2022 © GG
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of 
+ * this software and associated documentation files (the “Software”), to deal 
+ * in the Software without restriction, including without limitation the rights to 
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies 
+ * of the Software, and to permit persons to whom the Software is furnished to do 
+ * so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all 
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+ * SOFTWARE.
  */
 
 // prints num chars from *bp
-int print_buf(char *bp, int num) {
+int print_buf(char *bp, int num, FILE *output) {
 	for (int count = 0; count < num; count++)
-		printf("%c", bp[count]);
+		fprintf(output, "%c", bp[count]);
 
 	return(0);
 }
 
-int main(int argv, char *argc[]) {
+int main(int argc, char *argv[]) {
 
 	char c;
 	int lw;
@@ -31,14 +48,29 @@ int main(int argv, char *argc[]) {
 	char *lbuf;
 	char *wbuf;
 	int newline_from_before = 0;
+	FILE *in;
+	FILE *out;
 
 	// get fw
-	if (argv > 1) {
-		lw = atoi(argc[1]);
+	if (argc > 1) {
+		lw = atoi(argv[1]);
 
 	} else {
 		fprintf(stderr, "Please specify line width.\n");
 		return(1);
+
+	}
+
+	// get files
+	in = stdin;
+	out = stdout;
+
+	if (argc >= 4) {
+		if (strcmp(argv[2], "-") != 0) in = fopen(argv[2], "r");
+		if (strcmp(argv[3], "-") != 0) out = fopen(argv[3], "w");
+
+	} else if (argc == 3) {
+		if (strcmp(argv[2], "-") != 0) in = fopen(argv[2], "r");
 
 	}
 
@@ -48,15 +80,15 @@ int main(int argv, char *argc[]) {
 
 	// main loop
 	for (;;) {
-		c = getchar();
+		c = getc(in);
 
 		if (c == '\n' || c == EOF) {
 			if (c == '\n')
 				if (newline_from_before) continue;
 
 			// prints buffer and resets vars
-			print_buf(lbuf, length);
-			printf("\n");
+			print_buf(lbuf, length, out);
+			fprintf(out, "\n");
 			length = 0;
 			wlength = 0;
 			last_blank = 0;
@@ -84,8 +116,8 @@ int main(int argv, char *argc[]) {
 		if ((length == lw) && (c != '\n')) {
 			// if word > lw
 			if (wlength == lw) {
-				print_buf(lbuf, length);
-				printf("\n");
+				print_buf(lbuf, length, out);
+				fprintf(out, "\n");
 				newline_from_before = 1;
 
 				length = 0;
@@ -94,8 +126,8 @@ int main(int argv, char *argc[]) {
 
 			// prints buffer
 			} else {
-				print_buf(lbuf, last_blank);
-				printf("\n");
+				print_buf(lbuf, last_blank, out);
+				fprintf(out, "\n");
 				newline_from_before = 1;
 
 				// resets vars
