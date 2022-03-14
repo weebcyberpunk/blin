@@ -8,6 +8,6 @@ Arch Linux and Arch-based Linux distributions users can copy `PKGBUILD`, run `ma
 
 ## Usage
 
-The basic use is: `$ blin <num>`. This will receive input from _stdin_ and print to _stdout_, breaking the lines in the last blank character before the newline character.
+The basic use is: `$ blin <num>`. This will receive input from _stdin_ and print to _stdout_, breaking the lines in the last blank character before the character limit.
 
 You can specify files too: `$ blin <num> <input file> <output file>` will receive input from `input file` and print to `output file`. If one of the files specified is `-`, it defaults to _stdin_ or _stdout_.
