@@ -1,0 +1,32 @@
+.TH BLIN 1 blin
+
+.SH NAME
+Blin \- Breakline in
+
+.SH SYNOPSIS
+.B blin
+.IR [limit]
+.IR [input file]
+.IR [output file]
+
+.SH DESCRIPTION
+.B blin 
+is a tool that concatenates 
+.IR input file
+to
+.IR output file
+, breaking the lines on the last blank character before the limit specified by 
+.IR limit.
+
+.SH USAGE
+.TP
+.IR [limit]
+specifies character limit.
+.TP
+.IR [input file]
+specifies input file. If not specified or -, uses 
+.IR stdin.
+.TP
+.IR [output file]
+specifies the output file. If not specified or -, uses
+.IR stdout.
