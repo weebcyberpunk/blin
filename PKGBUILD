@@ -18,4 +18,5 @@ build() {
 package() {
 	cd "$pkgname"
 	install -Dm755 blin $pkgdir/usr/bin/blin
+	install -Dm644 blin1.gz $pkgdir/usr/share/man/man1/blin1.gz
 }
