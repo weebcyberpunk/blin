@@ -1,5 +1,5 @@
 # Maintainer: GG weebcyberpunk@gmail.com
-pkgname=blin
+pkgname=blin-git
 pkgver=1.0.0
 pkgrel=1
 pkgdesc="Breaks lines in last-blank."
