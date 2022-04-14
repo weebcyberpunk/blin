@@ -11,12 +11,12 @@ source=("git+$url")
 md5sums=('SKIP')
 
 build() {
-	cd "$pkgname"
+	cd "blin"
 	gcc main.c -o blin
 }
 
 package() {
-	cd "$pkgname"
+	cd "blin"
 	install -Dm755 blin $pkgdir/usr/bin/blin
 	install -Dm644 blin.1 $pkgdir/usr/share/man/man1/blin.1
 }
