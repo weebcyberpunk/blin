@@ -4,7 +4,8 @@ Blin stands for "Breakline in". Started as an exercise, I actually founded it ve
 
 ## Installation
 
-Arch Linux and Arch-based Linux distributions users can copy `PKGBUILD`, run `makepkg` and install with `pacman -U` just like and AUR package.  
+Arch Linux and Arch-based Linux distributions users can install it from AUR with the package `blin-git`.  
+Others can install via `# make install` and uninstall via `# make uninstall`
 
 ## Usage
 
