@@ -31,8 +31,8 @@
  */
 
 // prints num chars from *bp
-int print_buf(char *bp, int num, FILE *output) {
-	for (int count = 0; count < num; count++)
+int print_buf(char *bp, unsigned long num, FILE *output) {
+	for (unsigned long count = 0; count < num; count++)
 		fprintf(output, "%c", bp[count]);
 
 	return(0);
@@ -41,13 +41,13 @@ int print_buf(char *bp, int num, FILE *output) {
 int main(int argc, char *argv[]) {
 
 	char c;
-	int lw;
-	int length = 0;
-	int wlength = 0;
-	int last_blank = 0;
+	unsigned long lw;
+	unsigned long length = 0;
+	unsigned long wlength = 0;
+	unsigned long last_blank = 0;
 	char *lbuf;
 	char *wbuf;
-	int newline_from_before = 0;
+	short newline_from_before = 0;
 	FILE *in;
 	FILE *out;
 
