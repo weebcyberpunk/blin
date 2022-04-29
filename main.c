@@ -4,7 +4,7 @@
 
 /*
  * author GG weebcyberpunk@gmail.com
- * version 0.0.0
+ * version 1.0.1
  * since Mar 11, 2022
  */
 
